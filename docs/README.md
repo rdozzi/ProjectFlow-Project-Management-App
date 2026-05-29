@@ -1,12 +1,15 @@
 <h1> ProjectFlow (A multi-tenant project management application) </h1>
 
 <h2 id="table-of-contents"> 0. Table of Contents </h2>
+<ul>
 
-<a href="#introduction">1. Introduction</a>
-<a href="#architecture-overview">2. Architecture Overview</a>
-<a href="#frontend">2.1 Frontend</a>
-<a href="#frontend">2.2 Backend</a>
-<a href="#frontend">2.3 Database</a>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#architecture-overview">2. Architecture Overview</a></li>
+<li><a href="#frontend">2.1 Frontend</a></li>
+<li><a href="#frontend">2.2 Backend</a></li>
+<li><a href="#frontend">2.3 Database</a></li>
+
+</ul>
 
 <h2 id="introduction"> 1. Introduction</h2>
 
