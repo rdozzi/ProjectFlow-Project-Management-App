@@ -2,6 +2,12 @@
 
 <h2 id="table-of-contents"> 0. Table of Contents </h2>
 
+<a href="#introduction">1. Introduction</a>
+<a href="#architecture-overview">2. Architecture Overview</a>
+<a href="#frontend">2.1 Frontend</a>
+<a href="#frontend">2.2 Backend</a>
+<a href="#frontend">2.3 Database</a>
+
 <h2 id="introduction"> 1. Introduction</h2>
 
 This is a Jira-like project management application MVP that I created as a part of a personal education project in my ongoing journey into fullstack web development and software engineering. The application is designed to manage tasks among teams of users representing tickets/issues in tabular, Kanban-like, and calendar views.
