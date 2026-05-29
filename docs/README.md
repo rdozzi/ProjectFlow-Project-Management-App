@@ -1,14 +1,14 @@
 <h1> ProjectFlow (A multi-tenant project management application) </h1>
 
-<h2> Table of Contents </h2>
+<h2 id="table-of-contents"> 0. Table of Contents </h2>
 
-<h2> 1. Introduction</h2>
+<h2 id="introduction"> 1. Introduction</h2>
 
 This is a Jira-like project management application MVP that I created as a part of a personal education project in my ongoing journey into fullstack web development and software engineering. The application is designed to manage tasks among teams of users representing tickets/issues in tabular, Kanban-like, and calendar views.
 
-<h2> 2. Architecture Overview </h2>
+<h2 id="architecture-overview"> 2. Architecture Overview </h2>
 
-<h3>Frontend</h3>
+<h3 id="frontend">Frontend</h3>
 <ul style="padding-left: 1.25rem">
   <li>React - UI Framework
   <li>TypeScript - type-safe application logic
@@ -16,7 +16,7 @@ This is a Jira-like project management application MVP that I created as a part 
   <li>Vite - build tool and development server
 </ul>
 
-<h3> Backend </h3>
+<h3 id="backend"> Backend </h3>
 <ul style="padding-left: 1.25rem">
 <li> Express.js - REST API Framework
 <li> Node.js - Runtime environment
@@ -24,22 +24,22 @@ This is a Jira-like project management application MVP that I created as a part 
 <li> Prisma - ORM and migration tooling
 </ul>
 
-<h3> Database </h3>
+<h3 id="database"> Database </h3>
 <ul style="padding-left: 1.25rem">
 <li> PostgreSQL - Primary relational datastore
 <li> Redis - Ephemeral data (counters, caching)
 </ul>
 
-<h2> 3. Application Features </h2>
+<h2 id="application-features"> 3. Application Features </h2>
 
-<h3> Authentication & Authorization </h3>
+<h3 id="authentication-&-authorization"> Authentication & Authorization </h3>
 <ul style="padding-left: 1.25rem">
 <li> User authentication with token-based access control (JWT)
 <li> Role awareness scoped to organizations and projects
 <li> Tenant-level data isolation across all resources
 </ul>
 
-<h3> Multi-Tenant Organization Model </h3>
+<h3 id="multi-tenant-organization-model"> Multi-Tenant Organization Model </h3>
 
 <ul style="padding-left: 1.25rem">
 <li> Organization-based hierarchy with user membership
@@ -47,7 +47,7 @@ This is a Jira-like project management application MVP that I created as a part 
 <li> Role-aware visibility of projects and tickets
 </ul>
 
-<h3> Entity Management </h3>
+<h3 id="entity-management"> Entity Management </h3>
 <ul style="padding-left: 1.25rem">
 <li> Project, board, ticket, and comment hierarchy with full CRUD operations
 <li> Board-level organization of tickets by status
@@ -55,35 +55,35 @@ This is a Jira-like project management application MVP that I created as a part 
 <li> Activity log generation and tracking for CRUD operations
 </ul>
 
-<h3> Multiple Task Views </h3>
+<h3 id="multiple-task-views"> Multiple Task Views </h3>
 <ul style="padding-left: 1.25rem">
 <li> List view with filtering capabilities
 <li> Kanban board view for workflow management
 <li> Calendar view listing tickets by due date
 </ul>
 
-<h3> File Attachments </h3>
+<h3 id="file-attachments"> File Attachments </h3>
 <ul style="padding-left: 1.25rem">
 <li> Attachment upload and download capabilities for projects, boards, tickets, and comments
 <li> Local and cloud (S3) storage layer
 </ul>
 
-<h3> User Experience (UX) & UI </h3>
+<h3 id="user-experience-and-ui"> User Experience (UX) & UI </h3>
 <ul style="padding-left: 1.25rem">
 <li> UI/UX features based on Ant Design component library
 <li> Light and Dark Theme support
 </ul>
 
-<h3> System Foundations </h3>
+<h3 id="system-foundations"> System Foundations </h3>
 <ul style="padding-left: 1.25rem">
 <li> RESTful API architecture
 <li> Centralized validation and error handling
 <li> Environment-aware configuration for development and production
 </ul>
 
-<h2> 4. Testing Strategy </h2>
+<h2 id="testing-strategy"> 4. Testing Strategy </h2>
 
-<h3>Summary</h3>
+<h3 id="summary">Summary</h3>
 
 The testing strategy implements a conscious balance of engineering rigor, pragmatic considerations and MVP delivery constraints that includes:
 
@@ -93,28 +93,28 @@ The testing strategy implements a conscious balance of engineering rigor, pragma
 <li> Frontend automation tests are postponed in favor of rapid iteration and manual validation
 </ul>
 
-<h3> Backend Testing </h3>
+<h3 id="backend-testing"> Backend Testing </h3>
 
 The backend was tested primarily through integration tests designed to validate real application behavior across controllers, services, and the database.
 
 Key Characteristics of the backend test approach include:
 
-<h4>"Happy-path" coverage for deployed routes </h4>
+<h4 id="coverage-for-deployed-routes">"Happy-path" coverage for deployed routes </h4>
 
 Core API endpoints including authentication, project/board/ticket/comment workflows, and attachment handling were tested for successful execution using realistic payloads and seeded data.
 
-<h4>Selective failure-mode validation</h4>
+<h4 id="selective-failure-mode-validation">Selective failure-mode validation</h4>
 Tests include representative failure scenarios such as invalid input, unauthorized access, and missing resources to ensure correct HTTP status codes and error handling behavior.
 
-<h4>Database-backed integration tests</h4>
+<h4 id="database-backed-integration-tests">Database-backed integration tests</h4>
 Tests run against a dedicated test database, exercising Prisma queries, transactions, and relational constraints.
 
-<h4>Intentional exclusion of non-deployed routes</h4>
+<h4 id="intentional-exclusion-of-non-deployed-routes">Intentional exclusion of non-deployed routes</h4>
 Controller and routes that were deprecated, experimental, or explicitly deferred from the first deployment were skipped to keep test scope aligned with production functionality.
 
 This approach ensures confidence in API correctness and data consistency without over-investing in test coverage for features not exposed in the MVP release.
 
-<h3> Frontend Testing </h3>
+<h3 id="fontend-testing"> Frontend Testing </h3>
 
 No automated frontend tests were implemented for this MVP release.
 
@@ -136,11 +136,11 @@ This decision was intentional based on:
 
 Frontend testing is intentionally deferred to post-deployment with future plans to introduce targeted component and integration tests.
 
-<h2> 5. Environment Configuration </h2>
+<h2 id="environment-configuration"> 5. Environment Configuration </h2>
 
 The environmental variables implemented within the application are separated between development, test, and production environments. Each environment uses its own database, cache, and storage configuration.
 
-<h3>Environmental Variables (.env)</h3>
+<h3 id="environment-variables">Environmental Variables (.env)</h3>
 
 The backend requires the following environment variables to be defined:
 
@@ -163,7 +163,7 @@ The backend requires the following environment variables to be defined:
 
 Attachments and general storage can either be stored in the local storage or in the AWS cloud. Hence, all AWS-related variabled are conditional.
 
-<h3>Test Environment (.env.test)</h3>
+<h3 id="test-environment">Test Environment (.env.test)</h3>
 
 The test environment uses overrides a subset of the developement environment variables to ensure deterministic and side-effect-free execution.
 
@@ -173,23 +173,23 @@ The test environment uses overrides a subset of the developement environment var
 | DATABASE_URL | Points to test database |
 |  JWT_SECRET  |  Non-production secret  |
 
-<h3>Frontend Environment</h3>
+<h3 id="fronted-development">Frontend Environment</h3>
 
 The frontend does not require environment-specific configuration for this MVP.
 
-<h3> Redis </h3>
+<h3 id="redis"> Redis </h3>
 Redis runs inside a local Docker container and is exposed on port 6379. 
 The Node.js application connects via localhost using the Redis TCP protocol.
 
-<h2> 6. Deployment </h2>
+<h2 id="deployment"> 6. Deployment </h2>
 
 The backend was deployed on Render using a production-specific TypeScript build configuration.
 
-<h2> 7. Known Limitations & Future Work </h2>
+<h2 id="known-limitations-and-future-work"> 7. Known Limitations & Future Work </h2>
 
-<h3> Known Limitations </h3>
+<h3 id="known-limitations"> Known Limitations </h3>
 
-<h4> Authentication & Authorization Architecture </h4>
+<h4 id="authentication-and-authorization-architecture"> Authentication & Authorization Architecture </h4>
 
 <ul style="padding-left: 1.25rem">
 <li> JWT-based auth<sup>1</sup>
@@ -206,55 +206,55 @@ The backend was deployed on Render using a production-specific TypeScript build 
 <li> No frontend unit or E2E tests
 </ul>
 
-<h4> Scalability & Performance </h4>
+<h4 id="scalability-and-performance"> Scalability & Performance </h4>
 <ul style="padding-left: 1.25rem">
 <li> Tuned for small times; currently no load testing
 <li> Limited Redis usage (no response caching)
 </ul>
 
-<h4> Storage & Infrastructure </h4>
+<h4 id="storage-and-infrastructure"> Storage & Infrastructure </h4>
 <ul style="padding-left: 1.25rem">
 <li>S3 tightly coupled; no storage abstraction
 <li>No CDN for attachments
 </ul>
 
-<h4> UI/UX </h4>
+<h4 id="ui-ux"> UI/UX </h4>
 <ul style="padding-left: 1.25rem">
 <li> Desktop-first layout (not optimized for tablet or mobile)
 <li> Partial accessibility coverage (ARIA attributes, keyboard navigation)
 </ul>
 
-<h3>Future Work</h3>
+<h3 id="future-work">Future Work</h3>
 
-<h4> Authentication Enhancements </h4>
+<h4 id="authentication-enhancements"> Authentication Enhancements </h4>
 <ul style="padding-left: 1.25rem">
 <li> Refresh token rotation and session invalidation (possible authentication overall to hybrid token and session-based systems)
 <li> OAuth / SSO providers
 <li> More robust organization-level permission models
 </ul>
 
-<h4> Testing & Quality </h4>
+<h4 id="testing-and-quality"> Testing & Quality </h4>
 <ul style="padding-left: 1.25rem">
 <li> Frontend unit testing
 <li> E2E tesing for critical user flows
 <li> Expanded backend test coverage
 </ul>
 
-<h4> Architecture & Scalability </h4>
+<h4 id="architecture-and-scalability"> Architecture & Scalability </h4>
 <ul style="padding-left: 1.25rem">
 <li> Abstract storage providers behind a service interface
 <li> Introduce query caching optimizations and query optimization
 <li> Add rate-limit tuning and app-admin observability (metrics, structured logging)
 </ul>
 
-<h4>Deployment & DevOps</h4>
+<h4 id="deployment-and-devops">Deployment & DevOps</h4>
 <ul style="padding-left: 1.25rem">
 <li> Containerized deployment with Docker
 <li> CI/CD pipeline for automated testing and deployment
 <li> Environment-specific configuration hardening
 </ul>
 
-<h4>Product Features</h4>
+<h4 id="product-features">Product Features</h4>
 <ul style="padding-left: 1.25rem">
 <li> Team communication: chats, polling, consistent asset update
 <li> Notifications (email/in-app)
@@ -262,7 +262,7 @@ The backend was deployed on Render using a production-specific TypeScript build 
 <li> Audit dashboards and organization usage analytics
 </ul>
 
-<h2> 8. Reporting and Contributing </h2>
+<h2 id="reporting-and-contributing"> 8. Reporting and Contributing </h2>
 
 <h3> Reporting Issues </h3>
 If you encounter a bug, unexpected behavior, or any other anomaly, please open an issue in the GitHub Issues tab.
@@ -277,7 +277,7 @@ Try to include the following:
 
 This project is maintained on a best-effort basis.
 
-<h3> Contributing </h3>
+<h3 id="contributing"> Contributing </h3>
 
 Contributions are welcome for bug fixes, small enhancements, and documentation improvements.
 
