@@ -1,14 +1,84 @@
 <h1> ProjectFlow (A multi-tenant project management application) </h1>
 
 <h2 id="table-of-contents"> 0. Table of Contents </h2>
-<ul>
+<ul style="padding: 0; list-style-type: none;">
 
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#architecture-overview">2. Architecture Overview</a></li>
-<li><a href="#frontend">2.1 Frontend</a></li>
-<li><a href="#frontend">2.2 Backend</a></li>
-<li><a href="#frontend">2.3 Database</a></li>
 
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#frontend">2.1 Frontend</a></li>
+  <li><a href="#backend">2.2 Backend</a></li>
+  <li><a href="#database">2.3 Database</a></li>
+
+  </ul>
+<li><a href="#application-features">3. Application Features</a></li>
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#authentication-&-authorization">3.1 Frontend</a></li>
+  <li><a href="#multi-tenant-organization-model">3.2 Multi-Tenant Organization Model</a></li>
+  <li><a href="#entity-management">3.3 Entity Management</a></li>
+  <li><a href="#multiple-task-views">3.4 Multiple Task Views</a></li>
+  <li><a href="#file-attachments">3.5 File Attachments</a></li>
+  <li><a href="#user-experience-and-ui">3.6 User Experience (UX) & UI</a></li>
+  <li><a href="#system-foundations">3.7 System Foundations</a></li>
+
+  </ul>
+
+<li><a href="#testing-strategy">4. Testing Strategy</a></li>
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#summary">4.1 Summary</a></li>
+  <li><a href="#backend-testing">4.2 Backend Testing</a></li>
+  
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#coverage-for-deployed-routes">4.2.1 "Happy-path" Coverage for Deployed Routes</a></li>
+  <li><a href="#selective-failure-mode-validation">4.2.2 Selective Failure-Mode Validation</a></li>
+  <li><a href="#database-backed-integration-tests">4.2.3 Intentional exclusion of non-deployed routes</a></li>
+
+  </ul>
+
+  <li><a href="#fontend-testing">4.3 Frontend Testing</a></li>
+  </li>
+  </ul>
+
+<li><a href="#environment-configuration">5. Environmental Configuration</a></li>
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#environment-variables">5.1 Environmental Variables</a></li>
+  <li><a href="#test-environment">5.2 Test Environment</a></li>
+  <li><a href="#fronted-development">5.3 Frontend Environment</a></li>
+  <li><a href="#redis">5.4 Redis</a></li>
+
+  </ul>
+<li><a href="#deployment">6. Deployment</a></li>
+<li><a href="#known-limitations-and-future-work">7. Known Limitations & Future Work</a></li>
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#environment-variables">7.1 Known Limitations</a></li>
+  
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#authentication-and-authorization-architecture">7.1.1 Authentication & Authorization Architecture</a></li>
+  <li><a href="#testing-coverage">7.1.2 Testing Coverage</a></li>
+  <li><a href="#scalability-and-performance">7.1.3 Scalability & Performance</a></li>
+  <li><a href="#storage-and-infrastructure">7.1.4 Storage & Infrastructure</a></li>
+  <li><a href="#authentication-enhancements">7.1.5 Authentication Enhancements</a></li>
+  <li><a href="#testing-and-quality">7.1.6 Testing & Quality</a></li>
+  <li><a href="#architecture-and-scalability">7.1.7 Architecture & Scalability</a></li>
+  <li><a href="#deployment-and-devops">7.1.8 Deployment & DevOps</a></li>
+  <li><a href="#product-features">7.1.9 Product Features</a></li>
+  </ul>
+
+  </ul>
+  <li><a href="#reporting-and-contributing">8. Reporting and Contributing</a></li>
+  <ul style="padding: 10; list-style-type: none;">
+
+  <li><a href="#reporting-issues">8.1 Reporting Issues</a></li>
+  <li><a href="#contributing">8.2 Contributing</a></li>
+  </ul>
 </ul>
 
 <h2 id="introduction"> 1. Introduction</h2>
@@ -208,7 +278,7 @@ The backend was deployed on Render using a production-specific TypeScript build 
 
 <sup>1</sup>For a browser-only MVP, a session-based authentication model would likely have reduced complexity around token invalidation and logout semantics. JWTs were selected to explore token-based patterns and for future API consumers.
 
-<h4> Testing Coverage </h4>
+<h4 id="testing-coverage"> Testing Coverage </h4>
 
 <ul style="padding-left: 1.25rem">
 <li> Backend integration tests only
@@ -273,7 +343,7 @@ The backend was deployed on Render using a production-specific TypeScript build 
 
 <h2 id="reporting-and-contributing"> 8. Reporting and Contributing </h2>
 
-<h3> Reporting Issues </h3>
+<h3 id="reporting-issues"> Reporting Issues </h3>
 If you encounter a bug, unexpected behavior, or any other anomaly, please open an issue in the GitHub Issues tab.
 
 Try to include the following:
