@@ -1,12 +1,12 @@
 <h1> ProjectFlow (A multi-tenant project management application) </h1>
 
 <h2 id="table-of-contents"> 0. Table of Contents </h2>
-<ul style="padding: 0; list-style-type: none;">
+<ul style="padding: 0; list-style: none;">
 
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#architecture-overview">2. Architecture Overview</a></li>
 
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#frontend">2.1 Frontend</a></li>
   <li><a href="#backend">2.2 Backend</a></li>
@@ -14,7 +14,7 @@
 
   </ul>
 <li><a href="#application-features">3. Application Features</a></li>
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#authentication-&-authorization">3.1 Frontend</a></li>
   <li><a href="#multi-tenant-organization-model">3.2 Multi-Tenant Organization Model</a></li>
@@ -27,12 +27,12 @@
   </ul>
 
 <li><a href="#testing-strategy">4. Testing Strategy</a></li>
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#summary">4.1 Summary</a></li>
   <li><a href="#backend-testing">4.2 Backend Testing</a></li>
   
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#coverage-for-deployed-routes">4.2.1 "Happy-path" Coverage for Deployed Routes</a></li>
   <li><a href="#selective-failure-mode-validation">4.2.2 Selective Failure-Mode Validation</a></li>
@@ -45,7 +45,7 @@
   </ul>
 
 <li><a href="#environment-configuration">5. Environmental Configuration</a></li>
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#environment-variables">5.1 Environmental Variables</a></li>
   <li><a href="#test-environment">5.2 Test Environment</a></li>
@@ -55,11 +55,11 @@
   </ul>
 <li><a href="#deployment">6. Deployment</a></li>
 <li><a href="#known-limitations-and-future-work">7. Known Limitations & Future Work</a></li>
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#environment-variables">7.1 Known Limitations</a></li>
   
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#authentication-and-authorization-architecture">7.1.1 Authentication & Authorization Architecture</a></li>
   <li><a href="#testing-coverage">7.1.2 Testing Coverage</a></li>
@@ -74,7 +74,7 @@
 
   </ul>
   <li><a href="#reporting-and-contributing">8. Reporting and Contributing</a></li>
-  <ul style="padding: 10; list-style-type: none;">
+  <ul style="padding: 10; list-style: none;">
 
   <li><a href="#reporting-issues">8.1 Reporting Issues</a></li>
   <li><a href="#contributing">8.2 Contributing</a></li>
