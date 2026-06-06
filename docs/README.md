@@ -1,225 +1,185 @@
-<h1> ProjectFlow (A multi-tenant project management application) </h1>
+# ProjectFlow (A multi-tenant project management application)
 
-<h2 id="table-of-contents"> 0. Table of Contents </h2>
-<ul style="padding: 0; list-style: none;">
+<!-- Start Table of Contents -->
 
-<li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#architecture-overview">2. Architecture Overview</a></li>
+## Table of Contents:
 
-  <ul style="padding: 10; list-style: none;">
+- [Introduction](#introduction)
 
-  <li><a href="#frontend">2.1 Frontend</a></li>
-  <li><a href="#backend">2.2 Backend</a></li>
-  <li><a href="#database">2.3 Database</a></li>
+- [Architecture Overview](#architecture-overview)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [Database](#database)
 
-  </ul>
-<li><a href="#application-features">3. Application Features</a></li>
-  <ul style="padding: 10; list-style: none;">
+- [Application Features](#application-features)
+  - [Authentication & Authorization](#authentication--authorization)
+  - [Multi-Tenant Organization Model](#multi-tenant-organization-model)
+  - [Entity Management](#entity-management)
+  - [Multiple Task Views](#multiple-task-views)
+  - [File Attachments](#file-attachments)
+  - [User Experience & Interface](#user-experience-ux--ui)
+  - [System Foundations](#system-foundations)
 
-  <li><a href="#authentication-&-authorization">3.1 Frontend</a></li>
-  <li><a href="#multi-tenant-organization-model">3.2 Multi-Tenant Organization Model</a></li>
-  <li><a href="#entity-management">3.3 Entity Management</a></li>
-  <li><a href="#multiple-task-views">3.4 Multiple Task Views</a></li>
-  <li><a href="#file-attachments">3.5 File Attachments</a></li>
-  <li><a href="#user-experience-and-ui">3.6 User Experience (UX) & UI</a></li>
-  <li><a href="#system-foundations">3.7 System Foundations</a></li>
+- [Testing Strategy](#testing-strategy)
+  - [Summary](#summary)
+  - [Backend Testing](#backend-testing)
+    - [Happy-Path Coverage for Deployed Routes](#happy-path-coverage-for-deployed-routes)
+    - [Selective Failure-Mode Validation](#selective-failure-mode-validation)
+    - [Database-Backed Integration Tests](#database-backed-integration-tests)
+    - [Intentional exclusion of non-deployed routes](#intentional-exclusion-of-non-deployed-routes)
 
-  </ul>
+  - [Frontend Testing](#frontend-testing)
 
-<li><a href="#testing-strategy">4. Testing Strategy</a></li>
-  <ul style="padding: 10; list-style: none;">
+- [Environmental Configuration](#environment-configuration)
+  - [Environmental Variables](#environmental-variables-env)
+  - [Test Environment](#test-environment-envtest)
+  - [Frontend Environment](#frontend-environment)
+  - [Redis](#redis)
 
-  <li><a href="#summary">4.1 Summary</a></li>
-  <li><a href="#backend-testing">4.2 Backend Testing</a></li>
-  
-  <ul style="padding: 10; list-style: none;">
+- [Deployment](#deployment)
 
-  <li><a href="#coverage-for-deployed-routes">4.2.1 "Happy-path" Coverage for Deployed Routes</a></li>
-  <li><a href="#selective-failure-mode-validation">4.2.2 Selective Failure-Mode Validation</a></li>
-  <li><a href="#database-backed-integration-tests">4.2.3 Intentional exclusion of non-deployed routes</a></li>
+- [Known Limitations & Future Work](#known-limitations--future-work)
+  - [Known Limitations](#known-limitations)
+    - [Authentication & Authorization Architecture](#authentication--authorization-architecture)
+    - [Testing Coverage](#testing-coverage)
+    - [Scalability & Performance](#scalability--performance)
+    - [Storage & Infrastructure](#storage--infrastructure)
+  - [Future Work](#future-work)
+    - [Authentication Enhancements](#authentication-enhancements)
+    - [Testing & Quality](#testing--quality)
+    - [Architecture & Scalability](#architecture--scalability)
+    - [Deployment & DevOps](#deployment--devops)
+    - [Product Features](#product-features)
 
-  </ul>
+- [Reporting and Contributing](#reporting-and-contributing)
+  - [Reporting Issues](#reporting-issues)
+  - [Contributing](#contributing)
 
-  <li><a href="#fontend-testing">4.3 Frontend Testing</a></li>
-  </li>
-  </ul>
+<!-- End Table of Contents -->
 
-<li><a href="#environment-configuration">5. Environmental Configuration</a></li>
-  <ul style="padding: 10; list-style: none;">
-
-  <li><a href="#environment-variables">5.1 Environmental Variables</a></li>
-  <li><a href="#test-environment">5.2 Test Environment</a></li>
-  <li><a href="#fronted-development">5.3 Frontend Environment</a></li>
-  <li><a href="#redis">5.4 Redis</a></li>
-
-  </ul>
-<li><a href="#deployment">6. Deployment</a></li>
-<li><a href="#known-limitations-and-future-work">7. Known Limitations & Future Work</a></li>
-  <ul style="padding: 10; list-style: none;">
-
-  <li><a href="#environment-variables">7.1 Known Limitations</a></li>
-  
-  <ul style="padding: 10; list-style: none;">
-
-  <li><a href="#authentication-and-authorization-architecture">7.1.1 Authentication & Authorization Architecture</a></li>
-  <li><a href="#testing-coverage">7.1.2 Testing Coverage</a></li>
-  <li><a href="#scalability-and-performance">7.1.3 Scalability & Performance</a></li>
-  <li><a href="#storage-and-infrastructure">7.1.4 Storage & Infrastructure</a></li>
-  <li><a href="#authentication-enhancements">7.1.5 Authentication Enhancements</a></li>
-  <li><a href="#testing-and-quality">7.1.6 Testing & Quality</a></li>
-  <li><a href="#architecture-and-scalability">7.1.7 Architecture & Scalability</a></li>
-  <li><a href="#deployment-and-devops">7.1.8 Deployment & DevOps</a></li>
-  <li><a href="#product-features">7.1.9 Product Features</a></li>
-  </ul>
-
-  </ul>
-  <li><a href="#reporting-and-contributing">8. Reporting and Contributing</a></li>
-  <ul style="padding: 10; list-style: none;">
-
-  <li><a href="#reporting-issues">8.1 Reporting Issues</a></li>
-  <li><a href="#contributing">8.2 Contributing</a></li>
-  </ul>
-</ul>
-
-<h2 id="introduction"> 1. Introduction</h2>
+## Introduction
 
 This is a Jira-like project management application MVP that I created as a part of a personal education project in my ongoing journey into fullstack web development and software engineering. The application is designed to manage tasks among teams of users representing tickets/issues in tabular, Kanban-like, and calendar views.
 
-<h2 id="architecture-overview"> 2. Architecture Overview </h2>
+## Architecture Overview
 
-<h3 id="frontend">Frontend</h3>
-<ul style="padding-left: 1.25rem">
-  <li>React - UI Framework
-  <li>TypeScript - type-safe application logic
-  <li>Ant Design - component library and design system
-  <li>Vite - build tool and development server
-</ul>
+### Frontend
 
-<h3 id="backend"> Backend </h3>
-<ul style="padding-left: 1.25rem">
-<li> Express.js - REST API Framework
-<li> Node.js - Runtime environment
-<li> Typescript - Application logic and contracts
-<li> Prisma - ORM and migration tooling
-</ul>
+- React - UI Framework
+- TypeScript - type-safe application logic
+- Ant Design - component library and design system
+- Vite - build tool and development server
 
-<h3 id="database"> Database </h3>
-<ul style="padding-left: 1.25rem">
-<li> PostgreSQL - Primary relational datastore
-<li> Redis - Ephemeral data (counters, caching)
-</ul>
+### Backend
 
-<h2 id="application-features"> 3. Application Features </h2>
+- Express.js - REST API Framework
+- Node.js - Runtime environment
+- Typescript - Application logic and contracts
+- Prisma - ORM and migration tooling
 
-<h3 id="authentication-&-authorization"> Authentication & Authorization </h3>
-<ul style="padding-left: 1.25rem">
-<li> User authentication with token-based access control (JWT)
-<li> Role awareness scoped to organizations and projects
-<li> Tenant-level data isolation across all resources
-</ul>
+### Database
 
-<h3 id="multi-tenant-organization-model"> Multi-Tenant Organization Model </h3>
+- PostgreSQL - Primary relational datastore
+- Redis - Ephemeral data (counters, caching)
 
-<ul style="padding-left: 1.25rem">
-<li> Organization-based hierarchy with user membership
-<li> Separation of data between organizations
-<li> Role-aware visibility of projects and tickets
-</ul>
+## Application Features
 
-<h3 id="entity-management"> Entity Management </h3>
-<ul style="padding-left: 1.25rem">
-<li> Project, board, ticket, and comment hierarchy with full CRUD operations
-<li> Board-level organization of tickets by status
-<li> Assignments, due dates, priority, and status tracking for tickets
-<li> Activity log generation and tracking for CRUD operations
-</ul>
+### Authentication & Authorization
 
-<h3 id="multiple-task-views"> Multiple Task Views </h3>
-<ul style="padding-left: 1.25rem">
-<li> List view with filtering capabilities
-<li> Kanban board view for workflow management
-<li> Calendar view listing tickets by due date
-</ul>
+- User authentication with token-based access control (JWT)
+- Role awareness scoped to organizations and projects
+- Tenant-level data isolation across all resources
 
-<h3 id="file-attachments"> File Attachments </h3>
-<ul style="padding-left: 1.25rem">
-<li> Attachment upload and download capabilities for projects, boards, tickets, and comments
-<li> Local and cloud (S3) storage layer
-</ul>
+### Multi-Tenant Organization Model
 
-<h3 id="user-experience-and-ui"> User Experience (UX) & UI </h3>
-<ul style="padding-left: 1.25rem">
-<li> UI/UX features based on Ant Design component library
-<li> Light and Dark Theme support
-</ul>
+- Organization-based hierarchy with user membership
+- Separation of data between organizations
+- Role-aware visibility of projects and tickets
 
-<h3 id="system-foundations"> System Foundations </h3>
-<ul style="padding-left: 1.25rem">
-<li> RESTful API architecture
-<li> Centralized validation and error handling
-<li> Environment-aware configuration for development and production
-</ul>
+### Entity Management
 
-<h2 id="testing-strategy"> 4. Testing Strategy </h2>
+- Project, board, ticket, and comment hierarchy with full CRUD operations
+- Board-level organization of tickets by status
+- Assignments, due dates, priority, and status tracking for tickets
+- Activity log generation and tracking for CRUD operations
 
-<h3 id="summary">Summary</h3>
+### Multiple Task Views
+
+- List view with filtering capabilities
+- Kanban board view for workflow management
+- Calendar view listing tickets by due date
+
+### File Attachments
+
+- Attachment upload and download capabilities for projects, boards, tickets, and comments
+- Local and cloud (S3) storage layer
+
+### User Experience & Interface
+
+- UI/UX features based on Ant Design component library
+- Light and Dark Theme support
+
+### System Foundations
+
+- RESTful API architecture
+- Centralized validation and error handling
+- Environment-aware configuration for development and production
+
+## Testing Strategy
+
+### Summary
 
 The testing strategy implements a conscious balance of engineering rigor, pragmatic considerations and MVP delivery constraints that includes:
 
-<ul style="padding-left: 1.25rem">
-<li> Active backend logic that impacts data integrity, protection, segregation. and security within a multi-tenant database architecture
-<li> Non-critical or deferred, "skipped," functionality is excluded from the initial test suite
-<li> Frontend automation tests are postponed in favor of rapid iteration and manual validation
-</ul>
+- Active backend logic that impacts data integrity, protection, segregation. and security within a multi-tenant database architecture
+- Non-critical or deferred, "skipped," functionality is excluded from the initial test suite
+- Frontend automation tests are postponed in favor of rapid iteration and manual validation
 
-<h3 id="backend-testing"> Backend Testing </h3>
+### Backend Testing
 
 The backend was tested primarily through integration tests designed to validate real application behavior across controllers, services, and the database.
 
 Key Characteristics of the backend test approach include:
 
-<h4 id="coverage-for-deployed-routes">"Happy-path" coverage for deployed routes </h4>
+#### Happy-Path coverage for deployed routes
 
 Core API endpoints including authentication, project/board/ticket/comment workflows, and attachment handling were tested for successful execution using realistic payloads and seeded data.
 
-<h4 id="selective-failure-mode-validation">Selective failure-mode validation</h4>
+#### Selective failure-mode validation
+
 Tests include representative failure scenarios such as invalid input, unauthorized access, and missing resources to ensure correct HTTP status codes and error handling behavior.
 
-<h4 id="database-backed-integration-tests">Database-backed integration tests</h4>
+#### Database-backed integration tests
+
 Tests run against a dedicated test database, exercising Prisma queries, transactions, and relational constraints.
 
-<h4 id="intentional-exclusion-of-non-deployed-routes">Intentional exclusion of non-deployed routes</h4>
+#### Intentional exclusion of non-deployed routes
+
 Controller and routes that were deprecated, experimental, or explicitly deferred from the first deployment were skipped to keep test scope aligned with production functionality.
 
 This approach ensures confidence in API correctness and data consistency without over-investing in test coverage for features not exposed in the MVP release.
 
-<h3 id="fontend-testing"> Frontend Testing </h3>
+### Frontend Testing
 
 No automated frontend tests were implemented for this MVP release.
 
 This decision was intentional based on:
 
-<ul style="padding-left: 1.25rem">
-<li> The project is a portfolio MVP that prioritzes backend robustness and functionality.
-<li> Time-constraint limits and the desire to reach a minimal deployment state (i.e. the MVP is "good enough" and "overdue" for deployment)
-
-<li> Reliance on manual validation and qualitative smoke testing for UI flows, including:
-</ul>
-
-<ul style="padding-left: 2.50rem">
-<li> Authentication and session handling
-<li> Project, board, and ticket interactions
-<li> File upload and download behavior
-<li> State synchronization across views
-</ul>
+- The project is a portfolio MVP that prioritzes backend robustness and functionality.
+- Time-constraint limits and the desire to reach a minimal deployment state (i.e. the MVP is "good enough" and "overdue" for deployment)
+- Reliance on manual validation and qualitative smoke testing for UI flows, including:
+  - Authentication and session handling
+  - Project, board, and ticket interactions
+  - File upload and download behavior
+  - State synchronization across views
 
 Frontend testing is intentionally deferred to post-deployment with future plans to introduce targeted component and integration tests.
 
-<h2 id="environment-configuration"> 5. Environment Configuration </h2>
+## Environment Configuration
 
 The environmental variables implemented within the application are separated between development, test, and production environments. Each environment uses its own database, cache, and storage configuration.
 
-<h3 id="environment-variables">Environmental Variables (.env)</h3>
+### Environmental Variables (.env)
 
 The backend requires the following environment variables to be defined:
 
@@ -242,7 +202,7 @@ The backend requires the following environment variables to be defined:
 
 Attachments and general storage can either be stored in the local storage or in the AWS cloud. Hence, all AWS-related variabled are conditional.
 
-<h3 id="test-environment">Test Environment (.env.test)</h3>
+### Test Environment (.env.test)
 
 The test environment uses overrides a subset of the developement environment variables to ensure deterministic and side-effect-free execution.
 
@@ -252,111 +212,99 @@ The test environment uses overrides a subset of the developement environment var
 | DATABASE_URL | Points to test database |
 |  JWT_SECRET  |  Non-production secret  |
 
-<h3 id="fronted-development">Frontend Environment</h3>
+### Frontend Environment
 
 The frontend does not require environment-specific configuration for this MVP.
 
-<h3 id="redis"> Redis </h3>
-Redis runs inside a local Docker container and is exposed on port 6379. 
+### Redis
+
+Redis runs inside a local Docker container and is exposed on port 6379.
 The Node.js application connects via localhost using the Redis TCP protocol.
 
-<h2 id="deployment"> 6. Deployment </h2>
+## Deployment
 
 The backend was deployed on Render using a production-specific TypeScript build configuration.
 
-<h2 id="known-limitations-and-future-work"> 7. Known Limitations & Future Work </h2>
+## Known Limitations & Future Work
 
-<h3 id="known-limitations"> Known Limitations </h3>
+### Known Limitations
 
-<h4 id="authentication-and-authorization-architecture"> Authentication & Authorization Architecture </h4>
+#### Authentication & Authorization Architecture
 
-<ul style="padding-left: 1.25rem">
-<li> JWT-based auth<sup>1</sup>
-<li> No refresh token rotation or server-side invaliation
-<li> Route-level Role Based Access Control (RBAC); no fine-grained Authorization Control List (ACL)
-</ul>
+- JWT-based auth<sup>1</sup>
+- No refresh token rotation or server-side invaliation
+- Route-level Role Based Access Control (RBAC); no fine-grained Authorization Control List (ACL)
 
 <sup>1</sup>For a browser-only MVP, a session-based authentication model would likely have reduced complexity around token invalidation and logout semantics. JWTs were selected to explore token-based patterns and for future API consumers.
 
-<h4 id="testing-coverage"> Testing Coverage </h4>
+#### Testing Coverage
 
-<ul style="padding-left: 1.25rem">
-<li> Backend integration tests only
-<li> No frontend unit or E2E tests
-</ul>
+- Backend integration tests only
+- No frontend unit or E2E tests
 
-<h4 id="scalability-and-performance"> Scalability & Performance </h4>
-<ul style="padding-left: 1.25rem">
-<li> Tuned for small times; currently no load testing
-<li> Limited Redis usage (no response caching)
-</ul>
+#### Scalability & Performance
 
-<h4 id="storage-and-infrastructure"> Storage & Infrastructure </h4>
-<ul style="padding-left: 1.25rem">
-<li>S3 tightly coupled; no storage abstraction
-<li>No CDN for attachments
-</ul>
+- Tuned for small teams; currently no load testing
+- Limited Redis usage (no response caching)
 
-<h4 id="ui-ux"> UI/UX </h4>
-<ul style="padding-left: 1.25rem">
-<li> Desktop-first layout (not optimized for tablet or mobile)
-<li> Partial accessibility coverage (ARIA attributes, keyboard navigation)
-</ul>
+#### Storage & Infrastructure
 
-<h3 id="future-work">Future Work</h3>
+- S3 tightly coupled; no storage abstraction
+  -No CDN for attachments
 
-<h4 id="authentication-enhancements"> Authentication Enhancements </h4>
-<ul style="padding-left: 1.25rem">
-<li> Refresh token rotation and session invalidation (possible authentication overall to hybrid token and session-based systems)
-<li> OAuth / SSO providers
-<li> More robust organization-level permission models
-</ul>
+#### UI/UX
 
-<h4 id="testing-and-quality"> Testing & Quality </h4>
-<ul style="padding-left: 1.25rem">
-<li> Frontend unit testing
-<li> E2E tesing for critical user flows
-<li> Expanded backend test coverage
-</ul>
+- Desktop-first layout (not optimized for tablet or mobile)
+- Partial accessibility coverage (ARIA attributes, keyboard navigation)
 
-<h4 id="architecture-and-scalability"> Architecture & Scalability </h4>
-<ul style="padding-left: 1.25rem">
-<li> Abstract storage providers behind a service interface
-<li> Introduce query caching optimizations and query optimization
-<li> Add rate-limit tuning and app-admin observability (metrics, structured logging)
-</ul>
+### Future Work
 
-<h4 id="deployment-and-devops">Deployment & DevOps</h4>
-<ul style="padding-left: 1.25rem">
-<li> Containerized deployment with Docker
-<li> CI/CD pipeline for automated testing and deployment
-<li> Environment-specific configuration hardening
-</ul>
+#### Authentication Enhancements
 
-<h4 id="product-features">Product Features</h4>
-<ul style="padding-left: 1.25rem">
-<li> Team communication: chats, polling, consistent asset update
-<li> Notifications (email/in-app)
-<li> Frontend toast notifications, improved frontend features
-<li> Audit dashboards and organization usage analytics
-</ul>
+- Refresh token rotation and session invalidation (possible authentication overall to hybrid token and session-based systems)
+- OAuth / SSO providers
+- More robust organization-level permission models
 
-<h2 id="reporting-and-contributing"> 8. Reporting and Contributing </h2>
+#### Testing & Quality
 
-<h3 id="reporting-issues"> Reporting Issues </h3>
+- Frontend unit testing
+- E2E testing for critical user flows
+- Expanded backend test coverage
+
+#### Architecture & Scalability
+
+- Abstract storage providers behind a service interface
+- Introduce query caching optimizations and query optimization
+- Add rate-limit tuning and app-admin observability (metrics, structured logging)
+
+#### Deployment & DevOps
+
+- Containerized deployment with Docker
+- CI/CD pipeline for automated testing and deployment
+- Environment-specific configuration hardening
+
+#### Product Features
+
+- Team communication: chats, polling, consistent asset update
+- Notifications (email/in-app)
+- Frontend toast notifications, improved frontend features
+- Audit dashboards and organization usage analytics
+
+## Reporting and Contributing
+
+### Reporting Issues
+
 If you encounter a bug, unexpected behavior, or any other anomaly, please open an issue in the GitHub Issues tab.
 
 Try to include the following:
 
-<ul style="padding-left: 1.25rem">
-<li> Steps to reproduce
-<li> Expected vs actual behavior
-<li> Relevant screenshots or logs if applicable
-</ul>
+- Steps to reproduce
+- Expected vs actual behavior
+- Relevant screenshots or logs if applicable
 
 This project is maintained on a best-effort basis.
 
-<h3 id="contributing"> Contributing </h3>
+### Contributing
 
 Contributions are welcome for bug fixes, small enhancements, and documentation improvements.
 
@@ -364,11 +312,9 @@ For significant changes or new features, please open an issue first to discuss t
 
 Basic workflow:
 
-<ol style="padding-left: 1.25rem">
-<li> Fork the repository
-<li> Create a feature branch
-<li> Commit clear and descriptive messages (My development workflow used the Conventional Commits extension)
-<li> Submit a pull request with a brief explanation
-</ol>
+- Fork the repository
+- Create a feature branch
+- Commit clear and descriptive messages (My development workflow used the Conventional Commits extension)
+- Submit a pull request with a brief explanation
 
 By contributing, you agree that your contributions will be licensed under the MIT License.
